@@ -1,19 +1,48 @@
 def decode_barcodes(tags):
-    pass
+    barcodes = []
+    for tag in tags:
+        if '-' in tag:
+            segments = tag.split('-')
+            count = int(segments[1])
+            for i in range(count):
+                barcodes.append(segments[0])
+        else:
+            barcodes.append(tag)
+
+    return barcodes
 
 
 def load_all_items():
     return [
-        {"id": "0001", "name": "Coca Cola", "price": 3},
-        {"id": "0002", "name": "Diet Coke", "price": 4},
-        {"id": "0003", "name": "Pepsi-Cola", "price": 5},
-        {"id": "0004", "name": "Mountain Dew", "price": 6},
-        {"id": "0005", "name": "Dr Pepper", "price": 7},
-        {"id": "0006", "name": "Sprite", "price": 8},
-        {"id": "0007", "name": "Diet Pepsi", "price": 9},
-        {"id": "0008", "name": "Diet Mountain Dew", "price": 10},
-        {"id": "0009", "name": "Diet Dr Pepper", "price": 11},
-        {"id": "0010", "name": "Fanta", "price": 12}
+        {"id": "ITEM000001", "name": "Coca Cola", "price": 3},
+        {"id": "ITEM000002", "name": "Diet Coke", "price": 4},
+        {"id": "ITEM000003", "name": "Pepsi-Cola", "price": 5},
+        {"id": "ITEM000004", "name": "Mountain Dew", "price": 6},
+        {"id": "ITEM000005", "name": "Dr Pepper", "price": 7},
+        {"id": "ITEM000006", "name": "Sprite", "price": 8},
+        {"id": "ITEM000007", "name": "Diet Pepsi", "price": 9},
+        {"id": "ITEM000008", "name": "Diet Mountain Dew", "price": 10},
+        {"id": "ITEM000009", "name": "Diet Dr Pepper", "price": 11},
+        {"id": "ITEM0000010", "name": "Fanta", "price": 12}
+    ]
+
+
+def load_all_promotions():
+    return [
+        {
+            'type': 'BUY_TWO_GET_ONE_FREE',
+            'barcodes': [
+                'ITEM000000',
+                'ITEM000001'
+            ]
+        },
+        {
+            'type': 'OTHER_PROMOTION',
+            'barcodes': [
+                'ITEM000003',
+                'ITEM000004'
+            ]
+        }
     ]
 
 
@@ -46,26 +75,67 @@ def combine_items(barcodes):
 
 def decode_tags(tags):
     barcodes = decode_barcodes(tags)
-    items = combine_items(barcodes)
+    combined_items = combine_items(barcodes)
+    return combined_items
+
+
+def promote_receipt_items(items, all_promotions):
     return items
 
 
+def calculate_receipt_items(items):
+    for item in items:
+        count = item['count']
+        price = item['price']
+        item['total'] = price*count
+    return items
+    # all_promotions = load_all_promotions()
+    # return promote_receipt_items(items, all_promotions)
+
+
+def calculate_receipt_total(items):
+    total = 0
+    for item in items:
+        total += item['total']
+    return total
+
+
+def calculate_receipt_saving(receipt_items):
+    return 0
+
+
 def calculate_receipt(items):
-    pass
+    receipt = {}
+    receipt_items = calculate_receipt_items(items)
+    total = calculate_receipt_total(receipt_items)
+    saving = calculate_receipt_saving(receipt_items)
+    receipt['items'] = receipt_items
+    receipt['total'] = total
+    receipt['saving'] = saving
+    return receipt
 
 
 def render_receipt(receipt):
-    pass
+    return receipt
 
 
 def print_receipt(tags):
-    items = decode_tags(tags)
-    receipt = calculate_receipt(items)
+    decoded_items = decode_tags(tags)
+    receipt = calculate_receipt(decoded_items)
     rendered_receipt = render_receipt(receipt)
+    return rendered_receipt
 
 
-tags = ['0001', '0003', '0005', '0003']
-# print_receipt(tags)
-
-items = combine_items(tags)
-print(items)
+current_tags = [
+    'ITEM000001',
+    'ITEM000001',
+    'ITEM000001',
+    'ITEM000001',
+    'ITEM000001',
+    'ITEM000003-2',
+    'ITEM000005',
+    'ITEM000005',
+    'ITEM000005'
+]
+result = print_receipt(current_tags)
+print(result)
