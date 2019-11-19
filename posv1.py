@@ -115,15 +115,44 @@ def calculate_receipt(items):
     return receipt
 
 
-def render_receipt(receipt):
+def render_header():
+    return "***<没钱赚商店>收据***"
+
+
+def render_items(receipt_items):
+    receipt = ''
+    for item in receipt_items:
+        item_str = "名称：%s，数量：%s瓶，单价：%s(元)，小计：%s(元) \n" % (item['name'], item['count'], item['price'], item['total'])
+        receipt += item_str
+    receipt += "----------------------"
     return receipt
+
+
+def render_total(total):
+    return "总计：%s(元)" % total
+
+
+def render_saving(saving):
+    return "节省：%s(元)" % saving
+
+
+def render_footer():
+    return "**********************"
+
+
+def render_receipt(receipt):
+    header = render_header()
+    item_str = render_items(receipt['items'])
+    total_str = render_total(receipt['total'])
+    saving_str = render_saving(receipt['saving'])
+    footer = render_footer()
+    return '\n'.join([header, item_str, total_str, saving_str, footer])
 
 
 def print_receipt(tags):
     decoded_items = decode_tags(tags)
     receipt = calculate_receipt(decoded_items)
-    rendered_receipt = render_receipt(receipt)
-    return rendered_receipt
+    return render_receipt(receipt)
 
 
 current_tags = [
