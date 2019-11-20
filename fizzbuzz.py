@@ -7,6 +7,8 @@ class FizzBuzz:
         return word
 
 
-
-# if __name__ == '__main__':
-#     unittest.main()
+if __name__ == '__main__':
+    fizzbuzz = FizzBuzz()
+    for number in range(10):
+        word = fizzbuzz.fizzBuzz(number)
+        print(word)
