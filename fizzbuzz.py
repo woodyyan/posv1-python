@@ -12,3 +12,7 @@ if __name__ == '__main__':
     for number in range(10):
         word = fizzbuzz.fizzBuzz(number)
         print(word)
+
+
+def test1():
+    return 1
