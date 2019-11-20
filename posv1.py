@@ -87,7 +87,7 @@ def calculate_receipt_items(items):
     for item in items:
         count = item['count']
         price = item['price']
-        item['total'] = price*count
+        item['total'] = price * count
     return items
     # all_promotions = load_all_promotions()
     # return promote_receipt_items(items, all_promotions)
@@ -155,6 +155,23 @@ def print_receipt(tags):
     return render_receipt(receipt)
 
 
+class Receipt:
+    items = []
+    total = 0
+    saving = 0
+
+
+class Employee:
+    def __init__(self, name, age, id):
+        self.name = name
+        self.age = age
+        self.id = id
+
+
+r = Receipt()
+r.name = 'a'
+r.age = 10
+
 current_tags = [
     'ITEM000001',
     'ITEM000001',
@@ -166,5 +183,6 @@ current_tags = [
     'ITEM000005',
     'ITEM000005'
 ]
-result = print_receipt(current_tags)
-print(result)
+# result = print_receipt(current_tags)
+print(r.name)
+print(r.age)
