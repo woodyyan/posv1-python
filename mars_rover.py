@@ -21,30 +21,39 @@ class MarsRover:
 
     def run(self, command=None):
         if command == 'M':
-            if self.info.direction == Direction.E:
-                self.info.x += 1
-            elif self.info.direction == Direction.W:
-                self.info.x -= 1
-            elif self.info.direction == Direction.N:
-                self.info.y += 1
-            elif self.info.direction == Direction.S:
-                self.info.y -= 1
+            self.move()
         elif command == 'L':
-            if self.info.direction == Direction.E:
-                self.info.direction = Direction.N
-            elif self.info.direction == Direction.W:
-                self.info.direction = Direction.S
-            elif self.info.direction == Direction.N:
-                self.info.direction = Direction.W
-            elif self.info.direction == Direction.S:
-                self.info.direction = Direction.E
+            self.turn_left()
         elif command == 'R':
-            if self.info.direction == Direction.E:
-                self.info.direction = Direction.S
-            elif self.info.direction == Direction.W:
-                self.info.direction = Direction.N
-            elif self.info.direction == Direction.N:
-                self.info.direction = Direction.E
-            elif self.info.direction == Direction.S:
-                self.info.direction = Direction.W
+            self.turn_right()
         return self.info
+
+    def turn_right(self):
+        if self.info.direction == Direction.E:
+            self.info.direction = Direction.S
+        elif self.info.direction == Direction.W:
+            self.info.direction = Direction.N
+        elif self.info.direction == Direction.N:
+            self.info.direction = Direction.E
+        elif self.info.direction == Direction.S:
+            self.info.direction = Direction.W
+
+    def turn_left(self):
+        if self.info.direction == Direction.E:
+            self.info.direction = Direction.N
+        elif self.info.direction == Direction.W:
+            self.info.direction = Direction.S
+        elif self.info.direction == Direction.N:
+            self.info.direction = Direction.W
+        elif self.info.direction == Direction.S:
+            self.info.direction = Direction.E
+
+    def move(self):
+        if self.info.direction == Direction.E:
+            self.info.x += 1
+        elif self.info.direction == Direction.W:
+            self.info.x -= 1
+        elif self.info.direction == Direction.N:
+            self.info.y += 1
+        elif self.info.direction == Direction.S:
+            self.info.y -= 1
