@@ -23,4 +23,6 @@ class MarsRover:
         if command == 'M':
             if self.info.direction == Direction.E:
                 self.info.x += 1
+            elif self.info.direction == Direction.W:
+                self.info.x -= 1
         return self.info
