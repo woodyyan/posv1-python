@@ -9,12 +9,18 @@ class Direction(Enum):
 
 
 class MarsInfo:
-    def __init__(self, x, y, direction):
+    def __init__(self, x=0, y=0, direction=Direction.E):
         self.x = x
         self.y = y
         self.direction = direction
 
 
 class MarsRover:
-    def run(self, command):
-        return MarsInfo(0, 0, Direction.E)
+    def __init__(self, info=MarsInfo(0, 0, Direction.E)):
+        self.info = info
+
+    def run(self, command=None):
+        if command == 'M':
+            if self.info.direction == Direction.E:
+                self.info.x += 1
+        return self.info
