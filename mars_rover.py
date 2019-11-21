@@ -33,7 +33,7 @@ class MarsRover:
             if self.info.direction == Direction.E:
                 self.info.direction = Direction.N
             elif self.info.direction == Direction.W:
-                self.info.x -= 1
+                self.info.direction = Direction.S
             elif self.info.direction == Direction.N:
                 self.info.direction = Direction.W
             elif self.info.direction == Direction.S:
