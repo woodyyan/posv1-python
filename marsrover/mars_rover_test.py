@@ -1,5 +1,5 @@
 import unittest
-from mars_rover import MarsRover, MarsInfo, Direction
+from marsrover.mars_rover import MarsRover, MarsInfo, Direction
 
 
 class TestMarsRover(unittest.TestCase):

@@ -172,17 +172,17 @@ r = Receipt()
 r.name = 'a'
 r.age = 10
 
-current_tags = [
-    'ITEM000001',
-    'ITEM000001',
-    'ITEM000001',
-    'ITEM000001',
-    'ITEM000001',
-    'ITEM000003-2',
-    'ITEM000005',
-    'ITEM000005',
-    'ITEM000005'
-]
-# result = print_receipt(current_tags)
-print(r.name)
-print(r.age)
+if __name__ == '__main__':
+    current_tags = [
+        'ITEM000001',
+        'ITEM000001',
+        'ITEM000001',
+        'ITEM000001',
+        'ITEM000001',
+        'ITEM000003-2',
+        'ITEM000005',
+        'ITEM000005',
+        'ITEM000005'
+    ]
+    result = print_receipt(current_tags)
+    print(result)
