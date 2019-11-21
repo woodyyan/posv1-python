@@ -42,9 +42,9 @@ class MarsRover:
             if self.info.direction == Direction.E:
                 self.info.direction = Direction.S
             elif self.info.direction == Direction.W:
-                self.info.direction = Direction.S
-            elif self.info.direction == Direction.N:
-                self.info.direction = Direction.W
+                self.info.direction = Direction.N
+            elif self.info.direction == Direction.W:
+                self.info.direction = Direction.N
             elif self.info.direction == Direction.S:
-                self.info.direction = Direction.E
+                self.info.direction = Direction.W
         return self.info
