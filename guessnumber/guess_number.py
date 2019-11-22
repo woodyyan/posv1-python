@@ -1,3 +1,5 @@
+import random
+
 class GuessNumberGame:
     def __init__(self, answer=None):
         self.answer = answer
@@ -18,4 +20,7 @@ class GuessNumberGame:
 
 class AnswerGenerator:
     def generate(self):
-        return '1234'
+        answer = set()
+        while len(answer) < 4:
+            answer.add(str(random.randint(0, 9)))
+        return ''.join(answer)

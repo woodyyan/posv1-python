@@ -39,7 +39,7 @@ class TestGuessNumber(unittest.TestCase):
     def test_should_return_4_digits_when_generate_answer(self):
         answerGenerator = AnswerGenerator()
         answer = answerGenerator.generate()
-        self.assertEqual(answer.__len__(), 4)
+        self.assertEqual(len(answer), 4)
 
     def test_should_return_numbers_when_generate_answer(self):
         answerGenerator = AnswerGenerator()
@@ -52,3 +52,6 @@ class TestGuessNumber(unittest.TestCase):
         self.assertEqual(len(set(answer)), 4)
 
 
+class StubAnswerGenerator(AnswerGenerator):
+    def generate(self):
+        return '1234'
