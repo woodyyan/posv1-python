@@ -41,4 +41,9 @@ class TestGuessNumber(unittest.TestCase):
         answer = answerGenerator.generate()
         self.assertEqual(answer.__len__(), 4)
 
+    def test_should_return_numbers_when_generate_answer(self):
+        answerGenerator = AnswerGenerator()
+        answer = answerGenerator.generate()
+        self.assertTrue(answer.isdigit())
+
 
