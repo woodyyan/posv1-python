@@ -1,5 +1,5 @@
 import unittest
-from guessnumber.guess_number import GuessNumberGame
+from guessnumber.guess_number import GuessNumberGame, AnswerGenerator
 
 
 class TestGuessNumber(unittest.TestCase):
@@ -35,3 +35,10 @@ class TestGuessNumber(unittest.TestCase):
         self.game.answer = '1234'
         result = self.game.play('5671')
         self.assertEqual(result, '0A1B')
+
+    def test_should_return_4_digits_when_generate_answer(self):
+        answerGenerator = AnswerGenerator()
+        answer = answerGenerator.generate()
+        self.assertEqual(answer.__len__(), 4)
+
+

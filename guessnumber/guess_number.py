@@ -14,3 +14,8 @@ class GuessNumberGame:
                 else:
                     numbersCorrectCount += 1
         return '%sA%sB' % (allCorrectCount, numbersCorrectCount)
+
+
+class AnswerGenerator:
+    def generate(self):
+        return '1234'
