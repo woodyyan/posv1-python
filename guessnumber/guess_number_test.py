@@ -25,3 +25,13 @@ class TestGuessNumber(unittest.TestCase):
         self.game.answer = '1357'
         result = self.game.play('1234')
         self.assertEqual(result, '1A1B')
+
+    def test_should_return_0A4B_given_1234_when_answer_is_4321(self):
+        self.game.answer = '4321'
+        result = self.game.play('1234')
+        self.assertEqual(result, '0A4B')
+
+    def test_should_return_0A1B_given_1234_when_answer_is_5671(self):
+        self.game.answer = '1234'
+        result = self.game.play('5671')
+        self.assertEqual(result, '0A1B')
