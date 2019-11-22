@@ -1,6 +1,13 @@
 import random
 
+
+def get_player_answer():
+    return '1234'
+
+
 class GuessNumberGame:
+    ROUND_COUNT = 6
+
     def __init__(self, answer=None):
         self.answer = answer
 
@@ -16,6 +23,18 @@ class GuessNumberGame:
                 else:
                     numbersCorrectCount += 1
         return '%sA%sB' % (allCorrectCount, numbersCorrectCount)
+
+    def run(self):
+        isSuccess = False
+        for index in range(GuessNumberGame.ROUND_COUNT):
+            player_answer = get_player_answer()
+            answer = self.play(player_answer)
+            if answer == '4A0B':
+                isSuccess = True
+                break
+            else:
+                print(answer)
+        print('Game Over! You Win!' if isSuccess else 'Game Over! You Lose!')
 
 
 class AnswerGenerator:

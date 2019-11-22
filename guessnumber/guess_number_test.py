@@ -51,6 +51,10 @@ class TestGuessNumber(unittest.TestCase):
         answer = answerGenerator.generate()
         self.assertEqual(len(set(answer)), 4)
 
+    def test_should(self):
+        self.game.answer = '1234'
+        self.game.run()
+
 
 class StubAnswerGenerator(AnswerGenerator):
     def generate(self):
