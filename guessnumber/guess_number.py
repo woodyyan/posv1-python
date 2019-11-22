@@ -2,7 +2,9 @@ import random
 
 
 def get_player_answer():
-    return '1234'
+    answer = input('请输入你的数字：')
+#     TODO: verify input
+    return answer
 
 
 class GuessNumberGame:
@@ -34,7 +36,7 @@ class GuessNumberGame:
                 break
             else:
                 print(answer)
-        print('Game Over! You Win!' if isSuccess else 'Game Over! You Lose!')
+        print('Game Over! You Win!' if isSuccess else 'Game Over! You Lose! Answer is %s' % self.answer)
 
 
 class AnswerGenerator:
@@ -43,3 +45,9 @@ class AnswerGenerator:
         while len(answer) < 4:
             answer.add(str(random.randint(0, 9)))
         return ''.join(answer)
+
+
+if __name__ == '__main__':
+    game = GuessNumberGame()
+    game.answer = AnswerGenerator().generate()
+    game.run()
