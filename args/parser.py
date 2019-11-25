@@ -2,8 +2,11 @@ FLAG_LENGTH = 1
 
 
 class Args:
-    def __init__(self, message=None):
+    def __init__(self, message=None, items=None):
+        if items is None:
+            items = {}
         self.message = message
+        self.items = items
 
 
 class Parser:
@@ -26,6 +29,7 @@ class Parser:
             args.message = error_message
 
         # parse
+        self.parse_args(args, pairs)
 
         return args
 
@@ -91,6 +95,32 @@ class Parser:
 
     def check_duplicated_flags(self, all_flags):
         return len(all_flags) != len(set(all_flags))
+
+    def parse_args(self, args, pairs):
+        for flag in self.schema:
+            pair = self.get_pair(pairs, flag)
+            if pair:
+                if pair.value:
+                    args.items[flag] = pair.value
+                else:
+                    args.items[flag] = self.get_default_value(self.schema[flag])
+            else:
+                args.items[flag] = self.get_default_value(self.schema[flag])
+
+    def get_default_value(self, value_type):
+        if value_type == 'str':
+            return ''
+        elif value_type == 'int':
+            return 0
+        elif value_type == 'bool':
+            return False
+        return None
+
+    def get_pair(self, pairs, flag):
+        for pair in pairs:
+            if flag == pair.flag:
+                return pair
+        return None
 
 
 class Pair:

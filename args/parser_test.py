@@ -17,8 +17,7 @@ class TestParser(unittest.TestCase):
     # 语法分析
     # test_should_return_unsupported_flags_given_flag_is_l_when_schema_is_f
     # test_should_return_flag_l_type_is_int_given_l_abc_when_schema_is_l_with_int_value
-    # test_should_return_flag_d_type_is_string_given_d_123_when_schema_is_d_with_string_value
-    # test_should_return__given_d_123_l_abc_when_schema_is_d_with_int_and_l_with_string_value
+    # test_should_return_correct_args_given_d_123_l_abc_i_when_schema_is_d_int_l_string_i_bool_value
     #
     # 默认值
     # test_should_return_default_value_false_0_empty_given_p_d_when_schema_is_i_bool_p_int_d_string
@@ -102,3 +101,13 @@ class TestParser(unittest.TestCase):
         message = '  -d   123  -l  abc   -i   '
         args = parser.parse(message)
         self.assertEqual(args.message, None)
+
+    def test_should_return_default_value_false_0_empty_given_p_d_when_schema_is_b_bool_p_int_d_string(self):
+        schema = {'p': 'int', 'd': 'str', 'b': 'bool'}
+        parser = Parser(schema)
+        message = '  -d   -p   '
+        args = parser.parse(message)
+        self.assertEqual(args.message, None)
+        self.assertEqual(args.items['b'], False)
+        self.assertEqual(args.items['d'], '')
+        self.assertEqual(args.items['p'], 0)
