@@ -30,7 +30,13 @@ class Parser:
             return 'flags cannot be duplicated.'
         elif self.has_space_in_value(pairs):
             return 'invalid value.'
+        elif self.check_unsupported_flags(all_flags):
+            return 'unsupported flag.'
         return None
 
     def has_space_in_value(self, pairs):
         return len(list(filter(lambda p: len(list(filter(None, p.split(' ')))) > 2, pairs))) > 0
+
+    def check_unsupported_flags(self, all_flags):
+        supported_flags = list(map(lambda key: key, self.schema))
+        return len(list(filter(lambda f: f not in supported_flags, all_flags))) > 0
