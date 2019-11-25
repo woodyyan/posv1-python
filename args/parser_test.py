@@ -21,6 +21,7 @@ class TestParser(unittest.TestCase):
     #
     # 默认值
     # test_should_return_default_value_false_0_empty_given_p_d_when_schema_is_i_bool_p_int_d_string
+    # test_should_return_default_value_false_0_empty_given_none_message_when_schema_is_i_bool_p_int_d_string
     # test_should_return_true_8080_logs_value_given_i_p_8080_d_logs_when_schema_is_i_bool_p_int_d_string
     def test_should_return_flag_length_should_be_1_given_flag_length_is_2_when_verify_args(self):
         schema = ''
