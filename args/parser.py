@@ -20,16 +20,13 @@ class Parser:
             args.message = 'total length of message should not greater than 255.'
             return args
 
-        # split
         pairs = self.split(command)
 
-        # verify
         error_message = self.verify(pairs)
         if error_message:
             args.message = error_message
-
-        # parse
-        self.parse_args(args, pairs)
+        else:
+            self.parse_args(args, pairs)
 
         return args
 
