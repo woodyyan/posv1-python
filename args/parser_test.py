@@ -71,3 +71,12 @@ class TestParser(unittest.TestCase):
         message = '-l    0'
         args = parser.parse(message)
         self.assertEqual(args.message, None)
+
+    def test_should_return_total_length_should_not_greater_than_255_given_message_length_is_256(self):
+        schema = ''
+        parser = Parser(schema)
+        message_with_256_length = ''
+        for num in range(256):
+            message_with_256_length += str(num)
+        args = parser.parse(message_with_256_length)
+        self.assertEqual(args.message, 'total length of message should not greater than 255.')

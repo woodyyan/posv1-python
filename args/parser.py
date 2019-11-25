@@ -17,6 +17,8 @@ class Parser:
         return args
 
     def verify_message(self, message):
+        if len(message) > 255:
+            return 'total length of message should not greater than 255.'
         pairs = list(filter(None, message.split(' -')))
         all_items = message.split(' ')
         all_flags = list(filter(lambda p: p.startswith('-'), all_items))
