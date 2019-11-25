@@ -10,8 +10,11 @@ class Parser:
     def parse(self, message):
         args = Args()
         items = message.split(' ')
-        flags = filter(lambda i: i.startswith('-'), items)
-        invalid_length_flags = list(filter(lambda f: len(f) > 2, flags))
+        flags = list(filter(lambda i: i.startswith('-'), items))
+        values = list(filter(lambda i: not(i.startswith('-')), items))
+        invalid_length_flags = list(filter(lambda f: len(f) != 2, flags))
         if len(invalid_length_flags) > 0:
-            args.message = 'flag length should be 1.'
+            args.message = 'invalid flag length.'
+        elif len(flags) != len(set(flags)):
+            args.message = 'flags cannot be duplicated.'
         return args
