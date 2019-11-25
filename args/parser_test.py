@@ -20,9 +20,9 @@ class TestParser(unittest.TestCase):
     # test_should_return_correct_args_given_d_123_l_abc_i_when_schema_is_d_int_l_string_i_bool_value
     #
     # 默认值
-    # test_should_return_default_value_false_0_empty_given_p_d_when_schema_is_i_bool_p_int_d_string
-    # test_should_return_default_value_false_0_empty_given_none_message_when_schema_is_i_bool_p_int_d_string
-    # test_should_return_true_8080_logs_value_given_i_p_8080_d_logs_when_schema_is_i_bool_p_int_d_string
+    # test_should_return_default_value_false_0_empty_given_p_d_when_schema_is_b_bool_p_int_d_string
+    # test_should_return_default_value_false_0_empty_given_none_message_when_schema_is_b_bool_p_int_d_string
+    # test_should_return_true_8080_logs_value_given_i_p_8080_d_logs_when_schema_is_b_bool_p_int_d_string
     def test_should_return_flag_length_should_be_1_given_flag_length_is_2_when_verify_args(self):
         schema = {'l': 'int'}
         parser = Parser(schema)
@@ -120,3 +120,12 @@ class TestParser(unittest.TestCase):
         self.assertEqual(args.items['b'], False)
         self.assertEqual(args.items['d'], '')
         self.assertEqual(args.items['p'], 0)
+
+    def test_should_return_true_8080_logs_value_given_i_p_8080_d_logs_when_schema_is_b_bool_p_int_d_string(self):
+        schema = {'p': 'int', 'd': 'str', 'b': 'bool'}
+        parser = Parser(schema)
+        args = parser.parse('   -p  8080  -d logs  -b')
+        self.assertEqual(args.message, None)
+        self.assertEqual(args.items['b'], True)
+        self.assertEqual(args.items['d'], 'logs')
+        self.assertEqual(args.items['p'], 8080)

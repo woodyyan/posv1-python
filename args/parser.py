@@ -97,15 +97,34 @@ class Parser:
         return len(all_flags) != len(set(all_flags))
 
     def parse_args(self, args, pairs):
-        for flag in self.schema:
+        for flag, value_type in self.schema.items():
             pair = self.get_pair(pairs, flag)
-            if pair:
+            if value_type == 'bool':
+                args.items[flag] = self.get_bool_value(pair)
+            elif value_type == 'int':
+                args.items[flag] = self.get_int_value(pair)
+            elif pair:
                 if pair.value:
                     args.items[flag] = pair.value
                 else:
                     args.items[flag] = self.get_default_value(self.schema[flag])
             else:
                 args.items[flag] = self.get_default_value(self.schema[flag])
+
+    def get_bool_value(self, pair):
+        if pair:
+            if pair.value:
+                return True if pair.value == 'True' else False
+            else:
+                return True
+        else:
+            return False
+
+    def get_int_value(self, pair):
+        if pair:
+            if pair.value:
+                return int(pair.value)
+        return 0
 
     def get_default_value(self, value_type):
         if value_type == 'str':
