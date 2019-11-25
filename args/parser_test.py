@@ -10,9 +10,7 @@ class TestParser(unittest.TestCase):
     # test_should_return_flags_cannot_be_duplicated_given_two_same_flags
     # test_should_return_invalid_flag_given_flag_has_space_between_dash_and_letter
     # test_should_return_invalid_value_given_value_has_space
-    # test_should_return_args_given_multi_space_at_start
-    # test_should_return_args_given_multi_space_at_end
-    # test_should_return_args_given_multi_space_between_flag_and_value
+    # test_should_return_args_given_multi_space_at_start_end_middle
     # test_should_return_args_given_multi_space_between_two_flags_when_no_value
     # test_should_return_total_length_should_not_greater_than_255_given_message_length_is_256
     #
@@ -58,3 +56,17 @@ class TestParser(unittest.TestCase):
         message = '-l a b'
         args = parser.parse(message)
         self.assertEqual(args.message, 'invalid value.')
+
+    def test_should_return_args_given_multi_space_at_start_end_middle(self):
+        schema = ''
+        parser = Parser(schema)
+        message = '   -l    0   '
+        args = parser.parse(message)
+        self.assertEqual(args.message, None)
+
+    def test_should_return_args_given_multi_space_between_two_flags_when_no_value(self):
+        schema = ''
+        parser = Parser(schema)
+        message = '-l    0'
+        args = parser.parse(message)
+        self.assertEqual(args.message, None)
