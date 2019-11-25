@@ -111,3 +111,12 @@ class TestParser(unittest.TestCase):
         self.assertEqual(args.items['b'], False)
         self.assertEqual(args.items['d'], '')
         self.assertEqual(args.items['p'], 0)
+
+    def test_should_return_default_value_false_0_empty_given_none_message_when_schema_is_b_bool_p_int_d_string(self):
+        schema = {'p': 'int', 'd': 'str', 'b': 'bool'}
+        parser = Parser(schema)
+        args = parser.parse(None)
+        self.assertEqual(args.message, None)
+        self.assertEqual(args.items['b'], False)
+        self.assertEqual(args.items['d'], '')
+        self.assertEqual(args.items['p'], 0)
