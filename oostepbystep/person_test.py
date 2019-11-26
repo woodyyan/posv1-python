@@ -1,6 +1,6 @@
 import unittest
 
-from oostepbystep.person import Person
+from oostepbystep.person import Person, Student, Coach
 
 
 class TestPerson(unittest.TestCase):
@@ -14,3 +14,13 @@ class TestPerson(unittest.TestCase):
         tom = Person('Tom', '21', 2)
         introduce = tom.introduce()
         self.assertEqual(introduce, 'My name is Tom. I am 21 years old.')
+
+    def test_should_student_introduce(self):
+        tom = Student('Tom', '18', 1)
+        introduce = tom.introduce()
+        self.assertEqual(introduce, 'My name is Tom. I am 18 years old. Coding for the glory of HW.')
+
+    def test_should_coach_introduce(self):
+        tom = Coach('Tom', '20', 1)
+        introduce = tom.introduce()
+        self.assertEqual(introduce, 'My name is Tom. I am 20 years old. Teaching for the future of world.')

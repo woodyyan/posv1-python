@@ -6,3 +6,13 @@ class Person:
 
     def introduce(self):
         return 'My name is %s. I am %s years old.' % (self.name, self.age)
+
+
+class Student(Person):
+    def introduce(self):
+        return 'My name is %s. I am %s years old. Coding for the glory of HW.' % (self.name, self.age)
+
+
+class Coach(Person):
+    def introduce(self):
+        return 'My name is %s. I am %s years old. Teaching for the future of world.' % (self.name, self.age)
