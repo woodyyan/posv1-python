@@ -1,5 +1,7 @@
 import random
 
+CORRECT_ANSWER = '4A0B'
+
 
 def get_player_answer():
     answer = input('请输入你的数字：')
@@ -31,7 +33,7 @@ class GuessNumberGame:
         for index in range(GuessNumberGame.ROUND_COUNT):
             player_answer = get_player_answer()
             answer = self.play(player_answer)
-            if answer == '4A0B':
+            if answer == CORRECT_ANSWER:
                 isSuccess = True
                 break
             else:
