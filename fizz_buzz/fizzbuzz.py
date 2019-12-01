@@ -1,5 +1,7 @@
 class FizzBuzz:
-    def fizz_buzz(self, word):
+    def say_it(self, word):
+        if word % 3 == 0 and word % 5 == 0:
+            return 'fizzbuzz'
         if word % 3 == 0:
             return 'fizz'
         elif word % 5 == 0:
@@ -9,10 +11,5 @@ class FizzBuzz:
 
 if __name__ == '__main__':
     fizz_buzz = FizzBuzz()
-    for number in range(10):
-        word = fizz_buzz.fizz_buzz(number)
-        print(word)
-
-
-def test1():
-    return 1
+    for number in range(1, 16):
+        print(fizz_buzz.say_it(number))
