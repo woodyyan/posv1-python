@@ -46,6 +46,12 @@ class TestGuessNumber(unittest.TestCase):
         answer = answerGenerator.generate()
         self.assertEqual(len(set(answer)), 4)
 
+    def test_should_return_4A0B_given_1234_when_answer_is_1234_with_stub(self):
+        generator = StubAnswerGenerator()
+        game = GuessNumberGame(generator)
+        result = game.guess('1234')
+        self.assertEqual(result, '4A0B')
+
     def test_should_return_4A0B_given_1234_when_answer_is_1234_with_mock(self):
         generator = AnswerGenerator()
         generator.generate = mock.Mock(return_value='1234')
