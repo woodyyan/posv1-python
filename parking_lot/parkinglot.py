@@ -14,7 +14,7 @@ class ParkingLot:
 
     def fetch(self, ticket):
         if ticket in self.__cars:
-            return self.__cars[ticket]
+            return self.__cars.pop(ticket)
         return None
 
 
@@ -24,5 +24,3 @@ class Car:
 
 class Ticket:
     pass
-
-

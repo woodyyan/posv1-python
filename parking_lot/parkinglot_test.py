@@ -37,3 +37,13 @@ class TestParkingBoy(unittest.TestCase):
 
         self.assertIsNone(parking_boy.fetch(wrong_ticket))
         self.assertEqual(car, parking_boy.fetch(ticket))
+
+    def test_should_not_fetch_any_car_once_ticket_is_used(self):
+        parking_lot = ParkingLot()
+        parking_boy = ParkingBoy(parking_lot)
+        car = Car()
+        ticket = parking_boy.park(car)
+        fetched_car = parking_boy.fetch(ticket)
+
+        self.assertEqual(car, fetched_car)
+        self.assertIsNone(parking_boy.fetch(ticket))
