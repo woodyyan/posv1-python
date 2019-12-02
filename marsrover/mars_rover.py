@@ -23,18 +23,18 @@ class MarsRover:
         if command:
             command_list = list(command)
             for single_command in command_list:
-                self.run_single_command(single_command)
+                self.__run_single_command(single_command)
         return self.info
 
-    def run_single_command(self, command):
+    def __run_single_command(self, command):
         if command == 'M':
-            self.move()
+            self.__move()
         elif command == 'L':
-            self.turn_left()
+            self.__turn_left()
         elif command == 'R':
-            self.turn_right()
+            self.__turn_right()
 
-    def turn_right(self):
+    def __turn_right(self):
         if self.info.direction == Direction.E:
             self.info.direction = Direction.S
         elif self.info.direction == Direction.W:
@@ -44,7 +44,7 @@ class MarsRover:
         elif self.info.direction == Direction.S:
             self.info.direction = Direction.W
 
-    def turn_left(self):
+    def __turn_left(self):
         if self.info.direction == Direction.E:
             self.info.direction = Direction.N
         elif self.info.direction == Direction.W:
@@ -54,7 +54,7 @@ class MarsRover:
         elif self.info.direction == Direction.S:
             self.info.direction = Direction.E
 
-    def move(self):
+    def __move(self):
         if self.info.direction == Direction.E:
             self.info.x += 1
         elif self.info.direction == Direction.W:
