@@ -1,6 +1,10 @@
 class FizzBuzz:
     def say_it(self, word):
         result = ''
+
+        if '3' in str(word):
+            return 'fizz'
+
         if word % 3 == 0:
             result += 'fizz'
         if word % 5 == 0:

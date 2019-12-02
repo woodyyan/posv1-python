@@ -30,9 +30,13 @@ class TestFizzBuzz(unittest.TestCase):
         result = self.fizzbuzz.say_it(21)
         self.assertEqual(result, 'fizzwhizz')
 
-    def test_should_return_buzzwhizz_when_fizzbuzz_given_35(self):
-        result = self.fizzbuzz.say_it(35)
+    def test_should_return_buzzwhizz_when_fizzbuzz_given_70(self):
+        result = self.fizzbuzz.say_it(70)
         self.assertEqual(result, 'buzzwhizz')
+
+    def test_should_return_fizz_when_fizzbuzz_given_13(self):
+        result = self.fizzbuzz.say_it(13)
+        self.assertEqual(result, 'fizz')
 
 
 if __name__ == '__main__':
