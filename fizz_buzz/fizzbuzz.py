@@ -1,14 +1,16 @@
 class FizzBuzz:
     def say_it(self, word):
-        if word % 3 == 0 and word % 5 == 0:
-            return 'fizzbuzz'
+        result = ''
         if word % 3 == 0:
-            return 'fizz'
+            result += 'fizz'
         if word % 5 == 0:
-            return 'buzz'
+            result += 'buzz'
         if word % 7 == 0:
-            return 'buzz'
-        return word
+            result += 'whizz'
+
+        if result:
+            return result
+        return str(word)
 
 
 if __name__ == '__main__':
