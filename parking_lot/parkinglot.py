@@ -1,13 +1,20 @@
+class NoEnoughSpaceException(Exception):
+    pass
+
+
 class ParkingLot:
     __cars = {}
+    __capacity = 10
 
     def __init__(self, capacity=10):
-        self.capacity = capacity
+        self.__capacity = capacity
 
     def get_available_parking_position(self):
-        return self.capacity - len(self.__cars)
+        return self.__capacity - len(self.__cars)
 
     def park(self, car):
+        if self.__capacity <= len(self.__cars):
+            raise NoEnoughSpaceException()
         ticket = Ticket()
         self.__cars[ticket] = car
         return ticket

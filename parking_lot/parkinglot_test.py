@@ -1,7 +1,7 @@
 import unittest
 
 from parking_lot.parkingboy import ParkingBoy
-from parking_lot.parkinglot import ParkingLot, Car, Ticket
+from parking_lot.parkinglot import ParkingLot, Car, Ticket, NoEnoughSpaceException
 
 
 class TestParkingBoy(unittest.TestCase):
@@ -47,3 +47,10 @@ class TestParkingBoy(unittest.TestCase):
 
         self.assertEqual(car, fetched_car)
         self.assertIsNone(parking_boy.fetch(ticket))
+
+    def test_should_get_no_enough_space_exception_when_park_car_if_there_is_not_enough_position(self):
+        parking_lot = ParkingLot(1)
+        parking_boy = ParkingBoy(parking_lot)
+        car = Car()
+        self.assertIsNotNone(parking_boy.park(car))
+        self.assertRaises(NoEnoughSpaceException, parking_boy.park, car)
