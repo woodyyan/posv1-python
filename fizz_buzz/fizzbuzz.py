@@ -4,7 +4,9 @@ class FizzBuzz:
             return 'fizzbuzz'
         if word % 3 == 0:
             return 'fizz'
-        elif word % 5 == 0:
+        if word % 5 == 0:
+            return 'buzz'
+        if word % 7 == 0:
             return 'buzz'
         return word
 
