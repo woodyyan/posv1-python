@@ -13,7 +13,9 @@ class ParkingLot:
         return ticket
 
     def fetch(self, ticket):
-        return self.__cars[ticket]
+        if ticket in self.__cars:
+            return self.__cars[ticket]
+        return None
 
 
 class Car:
