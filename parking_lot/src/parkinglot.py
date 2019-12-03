@@ -3,11 +3,10 @@ class NoEnoughSpaceException(Exception):
 
 
 class ParkingLot:
-    __cars = {}
-    __capacity = 10
 
     def __init__(self, capacity=10):
         self.__capacity = capacity
+        self.__cars = {}
 
     def park(self, car):
         if self.__capacity <= len(self.__cars):

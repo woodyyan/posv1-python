@@ -54,3 +54,14 @@ class TestParkingBoy(unittest.TestCase):
         car = Car()
         self.assertIsNotNone(parking_boy.park(car))
         self.assertRaises(NoEnoughSpaceException, parking_boy.park, car)
+
+    def test_should_parking_car_to_any_lot_given_two_parking_lots(self):
+        first_parking_lot = ParkingLot(1)
+        second_parking_lot = ParkingLot(1)
+        car = Car()
+        parking_boy = ParkingBoy([first_parking_lot, second_parking_lot])
+
+        parking_boy.park(car)
+
+        self.assertTrue(first_parking_lot.is_full())
+        self.assertFalse(second_parking_lot.is_full())

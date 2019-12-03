@@ -2,7 +2,9 @@ from parking_lot.src.parkinglot import NoEnoughSpaceException
 
 
 class ParkingBoy:
-    def __init__(self, parking_lots=[]):
+    def __init__(self, parking_lots=None):
+        if parking_lots is None:
+            parking_lots = []
         self.parking_lots = parking_lots
 
     def park(self, car):
