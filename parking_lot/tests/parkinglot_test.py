@@ -1,7 +1,7 @@
 import unittest
 
-from parking_lot.parkingboy import ParkingBoy
-from parking_lot.parkinglot import ParkingLot, Car, Ticket, NoEnoughSpaceException
+from parking_lot.src.parkingboy import ParkingBoy
+from parking_lot.src.parkinglot import ParkingLot, Car, Ticket, NoEnoughSpaceException
 
 
 class TestParkingBoy(unittest.TestCase):
