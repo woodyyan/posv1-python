@@ -15,7 +15,7 @@ class TestPerson(unittest.TestCase):
         self.assertEqual(introduce, 'My name is Tom. I am 21 years old.')
 
     def test_should_coach_introduce(self):
-        tom = Teacher('Tom', '20')
+        tom = Teacher('Tom', '20', 1)
         introduce = tom.introduce()
         self.assertEqual(introduce, 'My name is Tom. I am 20 years old. Teaching for the future of world.')
 
