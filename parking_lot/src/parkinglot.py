@@ -9,9 +9,6 @@ class ParkingLot:
     def __init__(self, capacity=10):
         self.__capacity = capacity
 
-    def get_available_parking_position(self):
-        return self.__capacity - len(self.__cars)
-
     def park(self, car):
         if self.__capacity <= len(self.__cars):
             raise NoEnoughSpaceException()
