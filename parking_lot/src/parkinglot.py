@@ -21,6 +21,15 @@ class ParkingLot:
             return self.__cars.pop(ticket)
         return None
 
+    def is_full(self):
+        return len(self.__cars) >= self.__capacity
+
+    def get_available_space_count(self):
+        return self.__capacity - len(self.__cars)
+
+    def contains_car(self, ticket):
+        return ticket in self.__cars
+
 
 class Car:
     pass
