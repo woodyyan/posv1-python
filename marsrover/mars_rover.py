@@ -21,17 +21,17 @@ class MarsRover:
 
     def run(self, command=None):
         if command:
-            command_list = list(command)
-            for single_command in command_list:
-                self.__run_single_command(single_command)
+            demands = list(command)
+            for demand in demands:
+                self.__execute(demand)
         return self.info
 
-    def __run_single_command(self, command):
-        if command == 'M':
+    def __execute(self, demand):
+        if demand == 'M':
             self.__move()
-        elif command == 'L':
+        elif demand == 'L':
             self.__turn_left()
-        elif command == 'R':
+        elif demand == 'R':
             self.__turn_right()
 
     def __turn_right(self):
