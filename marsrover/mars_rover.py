@@ -1,20 +1,38 @@
-class MarsInfo:
-    def __init__(self, x=0, y=0, direction='E'):
-        self.x = x
-        self.y = y
-        self.direction = direction
+class Area:
+    def __init__(self, left, right, top, bottom, restrict_points):
+        self.left = left
+        self.right = right
+        self.top = top
+        self.bottom = bottom
+        self.restrict_points = restrict_points
+
+
+class ExceedAreaException(Exception):
+    pass
 
 
 class MarsRover:
-    def __init__(self, info=MarsInfo(0, 0, 'E')):
-        self.info = info
+    def __init__(self, info=None, area=None):
+        if info:
+            status = info.split(' ')
+            self.__x = int(status[0])
+            self.__y = int(status[1])
+            self.__direction = status[2]
+        else:
+            self.__x = 0
+            self.__y = 0
+            self.__direction = 'E'
+        self.__area = area
 
     def run(self, command=None):
         if command:
             demands = list(command)
-            for demand in demands:
-                self.__execute(demand)
-        return self.info
+            try:
+                for demand in demands:
+                    self.__execute(demand)
+            except ExceedAreaException:
+                return 'Exceed area!'
+        return '%s %s %s' % (self.__x, self.__y, self.__direction)
 
     def __execute(self, demand):
         if demand == 'M':
@@ -25,31 +43,39 @@ class MarsRover:
             self.__turn_right()
 
     def __turn_right(self):
-        if self.info.direction == 'E':
-            self.info.direction = 'S'
-        elif self.info.direction == 'W':
-            self.info.direction = 'N'
-        elif self.info.direction == 'N':
-            self.info.direction = 'E'
-        elif self.info.direction == 'S':
-            self.info.direction = 'W'
+        if self.__direction == 'E':
+            self.__direction = 'S'
+        elif self.__direction == 'W':
+            self.__direction = 'N'
+        elif self.__direction == 'N':
+            self.__direction = 'E'
+        elif self.__direction == 'S':
+            self.__direction = 'W'
 
     def __turn_left(self):
-        if self.info.direction == 'E':
-            self.info.direction = 'N'
-        elif self.info.direction == 'W':
-            self.info.direction = 'S'
-        elif self.info.direction == 'N':
-            self.info.direction = 'W'
-        elif self.info.direction == 'S':
-            self.info.direction = 'E'
+        if self.__direction == 'E':
+            self.__direction = 'N'
+        elif self.__direction == 'W':
+            self.__direction = 'S'
+        elif self.__direction == 'N':
+            self.__direction = 'W'
+        elif self.__direction == 'S':
+            self.__direction = 'E'
 
     def __move(self):
-        if self.info.direction == 'E':
-            self.info.x += 1
-        elif self.info.direction == 'W':
-            self.info.x -= 1
-        elif self.info.direction == 'N':
-            self.info.y += 1
-        elif self.info.direction == 'S':
-            self.info.y -= 1
+        if self.__direction == 'E':
+            self.__x += 1
+        elif self.__direction == 'W':
+            self.__x -= 1
+        elif self.__direction == 'N':
+            self.__y += 1
+        elif self.__direction == 'S':
+            self.__y -= 1
+
+        if self.__does_exceed_area():
+            raise ExceedAreaException()
+
+    def __does_exceed_area(self):
+        if self.__area:
+            return self.__x > self.__area.right or self.__x < self.__area.left or self.__y > self.__area.top or self.__y < self.__area.bottom
+        return False
