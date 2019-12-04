@@ -68,12 +68,17 @@ class TestMarsRover(unittest.TestCase):
         status = mars_rover.run('R')
         self.assertEqual(status, '0 0 E')
 
-    def test_should_return_not_move_given_command_is_M_when_location_is_10_and_10_and_facing_E(self):
-        mars_rover = MarsRover('10 10 E', Area(-10, 10, 10, -10, []))
-        status = mars_rover.run('M')
-        self.assertEqual(status, 'Exceed area!')
-
     def test_should_return_correct_location_and_direction_given_command_is_MLMMRMMML_when_facing_N(self):
         mars_rover = MarsRover('0 0 N')
         status = mars_rover.run('MLMMRMMML')
         self.assertEqual(status, '-2 4 W')
+
+    def test_should_return_exceed_area_given_command_is_M_when_location_is_10_and_10_and_facing_E(self):
+        mars_rover = MarsRover('10 10 E', Area(-10, 10, 10, -10, []))
+        status = mars_rover.run('M')
+        self.assertEqual(status, 'Exceed area!')
+
+    def test_should_return_stop_due_to_block_given_command_is_M_when_facing_restrict_point(self):
+        mars_rover = MarsRover('1 1 E', Area(-10, 10, 10, -10, [(2, 1), (1, 2)]))
+        status = mars_rover.run('M')
+        self.assertEqual(status, 'Stop due to block!')
