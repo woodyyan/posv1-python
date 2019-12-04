@@ -1,22 +1,12 @@
-from enum import Enum
-
-
-class Direction(Enum):
-    N = 1
-    S = 2
-    E = 3
-    W = 4
-
-
 class MarsInfo:
-    def __init__(self, x=0, y=0, direction=Direction.E):
+    def __init__(self, x=0, y=0, direction='E'):
         self.x = x
         self.y = y
         self.direction = direction
 
 
 class MarsRover:
-    def __init__(self, info=MarsInfo(0, 0, Direction.E)):
+    def __init__(self, info=MarsInfo(0, 0, 'E')):
         self.info = info
 
     def run(self, command=None):
@@ -35,31 +25,31 @@ class MarsRover:
             self.__turn_right()
 
     def __turn_right(self):
-        if self.info.direction == Direction.E:
-            self.info.direction = Direction.S
-        elif self.info.direction == Direction.W:
-            self.info.direction = Direction.N
-        elif self.info.direction == Direction.N:
-            self.info.direction = Direction.E
-        elif self.info.direction == Direction.S:
-            self.info.direction = Direction.W
+        if self.info.direction == 'E':
+            self.info.direction = 'S'
+        elif self.info.direction == 'W':
+            self.info.direction = 'N'
+        elif self.info.direction == 'N':
+            self.info.direction = 'E'
+        elif self.info.direction == 'S':
+            self.info.direction = 'W'
 
     def __turn_left(self):
-        if self.info.direction == Direction.E:
-            self.info.direction = Direction.N
-        elif self.info.direction == Direction.W:
-            self.info.direction = Direction.S
-        elif self.info.direction == Direction.N:
-            self.info.direction = Direction.W
-        elif self.info.direction == Direction.S:
-            self.info.direction = Direction.E
+        if self.info.direction == 'E':
+            self.info.direction = 'N'
+        elif self.info.direction == 'W':
+            self.info.direction = 'S'
+        elif self.info.direction == 'N':
+            self.info.direction = 'W'
+        elif self.info.direction == 'S':
+            self.info.direction = 'E'
 
     def __move(self):
-        if self.info.direction == Direction.E:
+        if self.info.direction == 'E':
             self.info.x += 1
-        elif self.info.direction == Direction.W:
+        elif self.info.direction == 'W':
             self.info.x -= 1
-        elif self.info.direction == Direction.N:
+        elif self.info.direction == 'N':
             self.info.y += 1
-        elif self.info.direction == Direction.S:
+        elif self.info.direction == 'S':
             self.info.y -= 1
