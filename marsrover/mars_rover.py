@@ -89,7 +89,8 @@ class MarsRover:
         return False
 
     def __has_restrict_point(self):
-        for point in self.__area.restrict_points:
-            if point[0] == self.__x and point[1] == self.__y:
-                return True
+        if self.__area:
+            for point in self.__area.restrict_points:
+                if point[0] == self.__x and point[1] == self.__y:
+                    return True
         return False
