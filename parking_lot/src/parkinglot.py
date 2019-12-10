@@ -23,11 +23,14 @@ class ParkingLot:
     def is_full(self):
         return len(self.__cars) >= self.__capacity
 
+    def contains_car(self, ticket):
+        return ticket in self.__cars
+
     def get_available_space_count(self):
         return self.__capacity - len(self.__cars)
 
-    def contains_car(self, ticket):
-        return ticket in self.__cars
+    def get_available_rate(self):
+        return self.get_available_space_count() / self.__capacity
 
 
 class Car:
