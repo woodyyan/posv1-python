@@ -20,3 +20,13 @@ class TestParkingManager(unittest.TestCase):
 
         self.assertIsNotNone(first_ticket)
         self.assertIsNotNone(second_ticket)
+
+    def test_should_car_can_be_fetched_given_correct_ticket(self):
+        parking_lot = ParkingLot(1)
+        manager = ParkingManager([parking_lot])
+
+        car = Car()
+        ticket = manager.park(car)
+        fetched_car = manager.fetch(ticket)
+
+        self.assertEqual(fetched_car, car)
