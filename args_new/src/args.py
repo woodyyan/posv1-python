@@ -1,4 +1,5 @@
-ARG_DELIMITER = ' '
+VALUE_DELIMITER = ' '
+ARG_DELIMITER = '-'
 
 
 class Arg:
@@ -15,11 +16,14 @@ class Args:
         self.__args = self.__parse_args(schema, texts)
 
     def __parse_args(self, schema, texts):
-        items = texts.split(ARG_DELIMITER)
+        arg_texts = texts.split(ARG_DELIMITER)
+        arg_texts = [i for i in arg_texts if i != '']
         args = []
-        for index in range(0, len(items), 2):
-            flag = items[index].strip('-')
-            real_value = schema.get_real_value(flag, items[index + 1])
+        for arg_text in arg_texts:
+            items = arg_text.strip().split(VALUE_DELIMITER)
+            flag = items[0]
+            value = items[1] if len(items) > 1 else None
+            real_value = schema.get_real_value(flag, value)
             arg = Arg(flag, real_value)
             args.append(arg)
         return args

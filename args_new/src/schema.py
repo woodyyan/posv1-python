@@ -21,7 +21,9 @@ class Schema:
         if value_type == 'bool':
             return bool(value)
         elif value_type == 'int':
-            return int(value)
+            return int(value) if value else 0
+        elif value_type == 'string':
+            return str(value) if value else ''
         return value
 
     def __get_value_type(self, flag):
