@@ -1,6 +1,7 @@
 import unittest
 
-from parking_lot.src.parkinglot import ParkingLot, Car
+from parking_lot.src.car_ticket import Car
+from parking_lot.src.parkinglot import ParkingLot
 from parking_lot.src.super_parkingboy import SuperParkingBoy
 
 

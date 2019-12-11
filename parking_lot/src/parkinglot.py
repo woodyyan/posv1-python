@@ -1,8 +1,9 @@
-class NoEnoughSpaceException(Exception):
-    pass
+from parking_lot.src.car_ticket import Ticket
+from parking_lot.src.exception import NoEnoughSpaceException
+from parking_lot.src.parkable import Parkable
 
 
-class ParkingLot:
+class ParkingLot(Parkable):
 
     def __init__(self, capacity=10):
         self.__capacity = capacity
@@ -20,10 +21,10 @@ class ParkingLot:
             return self.__cars.pop(ticket)
         return None
 
-    def is_full(self):
+    def is_full(self) -> bool:
         return len(self.__cars) >= self.__capacity
 
-    def contains_car(self, ticket):
+    def contains_car(self, ticket) -> bool:
         return ticket in self.__cars
 
     def get_available_space_count(self):
@@ -31,11 +32,3 @@ class ParkingLot:
 
     def get_available_rate(self):
         return self.get_available_space_count() / self.__capacity
-
-
-class Car:
-    pass
-
-
-class Ticket:
-    pass
