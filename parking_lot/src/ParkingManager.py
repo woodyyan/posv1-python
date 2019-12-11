@@ -14,4 +14,4 @@ class ParkingManager:
 
     def fetch(self, ticket):
         parking_lot = next(iter(filter(lambda p: p.contains_car(ticket), self.parkables)), None)
-        return parking_lot.fetch(ticket)
+        return parking_lot.fetch(ticket) if parking_lot else None
