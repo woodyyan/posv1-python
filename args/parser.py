@@ -20,24 +20,24 @@ class Parser:
             args.message = 'total length of message should not greater than 255.'
             return args
 
-        pairs = self.split(command)
+        pairs = self.__split(command)
 
-        error_message = self.verify(pairs)
+        error_message = self.__verify(pairs)
         if error_message:
             args.message = error_message
         else:
-            self.parse_args(args, pairs)
+            self.__parse_args(args, pairs)
 
         return args
 
-    def has_space_in_value(self, values):
+    def __has_space_in_value(self, values):
         return len(list(filter(lambda p: ' ' in p, filter(None, values)))) > 0
 
-    def check_unsupported_flags(self, all_flags):
+    def __check_unsupported_flags(self, all_flags):
         supported_flags = list(map(lambda key: key, self.schema))
         return len(list(filter(lambda f: f not in supported_flags, all_flags))) > 0
 
-    def check_wrong_type_value(self, pairs):
+    def __check_wrong_type_value(self, pairs):
         for pair in pairs:
             if pair.value:
                 value_type = self.schema[pair.flag]
@@ -52,7 +52,7 @@ class Parser:
                         return 'flag %s type should be %s.' % (pair.flag, value_type)
         return None
 
-    def split(self, message):
+    def __split(self, message):
         pairs = []
         if message:
             items = list(filter(None, message.strip().split('-')))
@@ -71,44 +71,44 @@ class Parser:
                         pairs.append(Pair(flag, None))
         return pairs
 
-    def verify(self, pairs):
+    def __verify(self, pairs):
         all_flags = list(map(lambda p: p.flag, pairs))
         all_values = list(map(lambda p: p.value, pairs))
-        if self.check_invalid_length_flag(all_flags):
+        if self.__check_invalid_length_flag(all_flags):
             return 'invalid flag length.'
-        elif self.check_duplicated_flags(all_flags):
+        elif self.__check_duplicated_flags(all_flags):
             return 'flags cannot be duplicated.'
-        elif self.has_space_in_value(all_values):
+        elif self.__has_space_in_value(all_values):
             return 'invalid value.'
-        elif self.check_unsupported_flags(all_flags):
+        elif self.__check_unsupported_flags(all_flags):
             return 'unsupported flag.'
-        wrong_type_message = self.check_wrong_type_value(pairs)
+        wrong_type_message = self.__check_wrong_type_value(pairs)
         if wrong_type_message:
             return wrong_type_message
         return None
 
-    def check_invalid_length_flag(self, all_flags):
+    def __check_invalid_length_flag(self, all_flags):
         return len(list(filter(lambda f: len(f) != FLAG_LENGTH, all_flags))) > 0
 
-    def check_duplicated_flags(self, all_flags):
+    def __check_duplicated_flags(self, all_flags):
         return len(all_flags) != len(set(all_flags))
 
-    def parse_args(self, args, pairs):
+    def __parse_args(self, args, pairs):
         for flag, value_type in self.schema.items():
-            pair = self.get_pair(pairs, flag)
+            pair = self.__get_pair(pairs, flag)
             if value_type == 'bool':
-                args.items[flag] = self.get_bool_value(pair)
+                args.items[flag] = self.__get_bool_value(pair)
             elif value_type == 'int':
-                args.items[flag] = self.get_int_value(pair)
+                args.items[flag] = self.__get_int_value(pair)
             elif pair:
                 if pair.value:
                     args.items[flag] = pair.value
                 else:
-                    args.items[flag] = self.get_default_value(self.schema[flag])
+                    args.items[flag] = self.__get_default_value(self.schema[flag])
             else:
-                args.items[flag] = self.get_default_value(self.schema[flag])
+                args.items[flag] = self.__get_default_value(self.schema[flag])
 
-    def get_bool_value(self, pair):
+    def __get_bool_value(self, pair):
         if pair:
             if pair.value:
                 return True if pair.value == 'True' else False
@@ -117,13 +117,13 @@ class Parser:
         else:
             return False
 
-    def get_int_value(self, pair):
+    def __get_int_value(self, pair):
         if pair:
             if pair.value:
                 return int(pair.value)
         return 0
 
-    def get_default_value(self, value_type):
+    def __get_default_value(self, value_type):
         if value_type == 'str':
             return ''
         elif value_type == 'int':
@@ -132,7 +132,7 @@ class Parser:
             return False
         return None
 
-    def get_pair(self, pairs, flag):
+    def __get_pair(self, pairs, flag):
         for pair in pairs:
             if flag == pair.flag:
                 return pair
