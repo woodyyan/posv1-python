@@ -1,9 +1,8 @@
 from parking_lot.src.car_ticket import Ticket
 from parking_lot.src.exception import NoEnoughSpaceException
-from parking_lot.src.parkable import Parkable
 
 
-class ParkingLot(Parkable):
+class ParkingLot:
 
     def __init__(self, capacity=10):
         self.__capacity = capacity
