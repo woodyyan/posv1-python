@@ -168,10 +168,6 @@ class Employee:
         self.id = id
 
 
-r = Receipt()
-r.name = 'a'
-r.age = 10
-
 if __name__ == '__main__':
     current_tags = [
         'ITEM000001',
