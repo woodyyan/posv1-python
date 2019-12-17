@@ -1,3 +1,21 @@
+## decode_tags
+### plan
+
+15min
+
+### do
+
+18min
+
+### check
+
+- 对python字典处理不熟悉，不知道如何循环字典，如何取值
+
+### action
+
+- 练习链接里面的练习https://www.w3schools.com/python/python_dictionaries.asp
+
+
 ## combine_items
 ### plan
 
@@ -15,7 +33,7 @@
 
 ### action
 - 做5个python的filter集合处理练习，https://www.w3schools.com/python/ref_func_filter.asp
-- 做5个lamdba练习，
+- 做lamdba练习，把现有代码使用filter的地方全部用lamdba替换。https://www.w3schools.com/python/python_lambda.asp
 
 
 
@@ -30,6 +48,11 @@
 
 ### check
 
-- 
+- 此处有一个多重循环，思考如何消除多重循环花了时间
 
 ### action
+
+- 先实现，再优化
+
+
+
