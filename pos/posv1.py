@@ -46,30 +46,32 @@ def load_all_promotions():
     ]
 
 
-def select_from_all_item_by_id(id):
+def select_from_all_item_by_id(barcode):
     all_items = load_all_items()
-    for item in all_items:
-        if id == item['id']:
-            item['count'] = 1
-            return item
+    item = next(filter(lambda it: it['id'] == barcode, all_items), None)
+    if item:
+        return ReceiptItem(item['id'], item['name'], item['price'])
+    return None
 
 
 def select_item_by_barcode(barcode, combined_items):
     for item in combined_items:
-        if item['id'] == barcode:
+        if item.barcode == barcode:
             return item
     return None
 
 
 def combine_items(barcodes):
+    print(barcodes)
     combined_items = []
     for barcode in barcodes:
         item = select_from_all_item_by_id(barcode)
         current_item = select_item_by_barcode(barcode, combined_items)
         if current_item:
-            current_item['count'] += 1
+            current_item.count += 1
         else:
             combined_items.append(item)
+    print(combine_items)
     return combined_items
 
 
@@ -80,14 +82,18 @@ def decode_tags(tags):
 
 
 def promote_receipt_items(items, all_promotions):
+    print(items)
+    print(all_promotions)
+
+    print(items)
     return items
 
 
 def calculate_receipt_items(items):
     for item in items:
-        count = item['count']
-        price = item['price']
-        item['total'] = price * count
+        count = item.count
+        price = item.price
+        item.total = price * count
     return items
     # all_promotions = load_all_promotions()
     # return promote_receipt_items(items, all_promotions)
@@ -96,7 +102,7 @@ def calculate_receipt_items(items):
 def calculate_receipt_total(items):
     total = 0
     for item in items:
-        total += item['total']
+        total += item.total
     return total
 
 
@@ -108,8 +114,7 @@ def calculate_receipt(items):
     receipt_items = calculate_receipt_items(items)
     total = calculate_receipt_total(receipt_items)
     saving = calculate_receipt_saving(receipt_items)
-    receipt = {'items': receipt_items, 'total': total, 'saving': saving}
-    return receipt
+    return Receipt(items, total, saving)
 
 
 def render_header():
@@ -119,7 +124,7 @@ def render_header():
 def render_items(receipt_items):
     receipt = ''
     for item in receipt_items:
-        item_str = "名称：%s，数量：%s瓶，单价：%s(元)，小计：%s(元) \n" % (item['name'], item['count'], item['price'], item['total'])
+        item_str = "名称：%s，数量：%s瓶，单价：%s(元)，小计：%s(元) \n" % (item.name, item.count, item.price, item.total)
         receipt += item_str
     receipt += "----------------------"
     return receipt
@@ -139,9 +144,9 @@ def render_footer():
 
 def render_receipt(receipt):
     header = render_header()
-    item_str = render_items(receipt['items'])
-    total_str = render_total(receipt['total'])
-    saving_str = render_saving(receipt['saving'])
+    item_str = render_items(receipt.items)
+    total_str = render_total(receipt.total)
+    saving_str = render_saving(receipt.saving)
     footer = render_footer()
     return '\n'.join([header, item_str, total_str, saving_str, footer])
 
@@ -153,9 +158,19 @@ def print_receipt(tags):
 
 
 class Receipt:
-    items = []
-    total = 0
-    saving = 0
+    def __init__(self, items, total, saving):
+        self.items = items
+        self.total = total
+        self.saving = saving
+
+
+class ReceiptItem:
+    def __init__(self, barcode, name, price, count=0):
+        self.barcode = barcode
+        self.name = name
+        self.price = price
+        self.count = count
+        self.total = 0
 
 
 if __name__ == '__main__':
