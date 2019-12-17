@@ -5,7 +5,7 @@
 
 ### do
 
-20min
+25min
 
 ### check
 
@@ -26,7 +26,7 @@
 
 ### do
 
-
+18min
 
 ### check
 

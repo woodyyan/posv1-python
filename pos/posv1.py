@@ -1,3 +1,7 @@
+from pos.Receipt import Receipt
+from pos.ReceiptItem import ReceiptItem
+
+
 def decode_barcodes(tags):
     barcodes = []
     for tag in tags:
@@ -160,22 +164,6 @@ def print_receipt(tags):
     decoded_items = decode_tags(tags)
     receipt = calculate_receipt(decoded_items)
     return render_receipt(receipt)
-
-
-class Receipt:
-    def __init__(self, items, total, saving):
-        self.items = items
-        self.total = total
-        self.saving = saving
-
-
-class ReceiptItem:
-    def __init__(self, barcode, name, price, count=0):
-        self.barcode = barcode
-        self.name = name
-        self.price = price
-        self.count = count
-        self.total = 0
 
 
 if __name__ == '__main__':
