@@ -103,7 +103,6 @@ def calculate_receipt_items(items):
         count = item.count
         price = item.price
         item.total = price * count
-    # return items
     all_promotions = load_all_promotions()
     promoted_items = promote_receipt_items(items, all_promotions)
     print(promoted_items)

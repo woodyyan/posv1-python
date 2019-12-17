@@ -1,6 +1,7 @@
 import unittest
 
-from args_new.src.args import Args
+from args_new.src.args import Args, Arg
+from args_new.src.exceptioon import InvalidArgsException
 from args_new.src.schema import Schema
 
 
@@ -25,6 +26,12 @@ class TestArgs(unittest.TestCase):
         self.assertEqual(args.value_of('x'), False)
         self.assertEqual(args.value_of('y'), '')
         self.assertEqual(args.value_of('z'), 0)
+
+    def test_should_raise_invalid_args_exception_given_flag_length_more_than_1(self):
+        try:
+            Arg('ll', 'value')
+        except InvalidArgsException as ex:
+            self.assertEqual(ex.message, 'Flag length should equal 1.')
 
 
 if __name__ == '__main__':
