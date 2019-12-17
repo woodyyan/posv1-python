@@ -32,15 +32,9 @@ def load_all_promotions():
         {
             'type': 'BUY_TWO_GET_ONE_FREE',
             'barcodes': [
-                'ITEM000000',
-                'ITEM000001'
-            ]
-        },
-        {
-            'type': 'OTHER_PROMOTION',
-            'barcodes': [
-                'ITEM000003',
-                'ITEM000004'
+                'ITEM000001',
+                'ITEM000003'
+                'ITEM000005'
             ]
         }
     ]
@@ -85,6 +79,12 @@ def promote_receipt_items(items, all_promotions):
     print(items)
     print(all_promotions)
 
+    for promotion in all_promotions:
+        if promotion['type'] == 'BUY_TWO_GET_ONE_FREE':
+            for item in items:
+                if item.barcode in promotion['barcodes']:
+                    if item.count > 1:
+                        item.total = item.price * item.count/2
     print(items)
     return items
 
@@ -94,9 +94,9 @@ def calculate_receipt_items(items):
         count = item.count
         price = item.price
         item.total = price * count
-    return items
-    # all_promotions = load_all_promotions()
-    # return promote_receipt_items(items, all_promotions)
+    # return items
+    all_promotions = load_all_promotions()
+    return promote_receipt_items(items, all_promotions)
 
 
 def calculate_receipt_total(items):
@@ -107,7 +107,12 @@ def calculate_receipt_total(items):
 
 
 def calculate_receipt_saving(receipt_items):
-    return 0
+    total = 0
+    promoted_total = 0
+    for item in receipt_items:
+        total += item.count * item.price
+        promoted_total += item.total
+    return total - promoted_total
 
 
 def calculate_receipt(items):
