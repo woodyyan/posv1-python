@@ -30,6 +30,7 @@ class TestArgs(unittest.TestCase):
     def test_should_raise_invalid_args_exception_given_flag_length_more_than_1(self):
         try:
             Arg('ll', 'value')
+            self.fail()
         except InvalidArgsException as ex:
             self.assertEqual(ex.message, 'Flag length should equal 1.')
 

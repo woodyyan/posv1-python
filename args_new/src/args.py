@@ -6,14 +6,14 @@ ARG_DELIMITER = '-'
 
 class Arg:
     def __init__(self, flag=None, value=None):
-        self.__validate(flag, value)
+        self.__validate(flag)
         self.flag = flag.strip('-')
         self.value = value
 
     def with_flag(self, flag) -> bool:
         return self.flag == flag
 
-    def __validate(self, flag, value):
+    def __validate(self, flag):
         if len(flag) > 1:
             raise InvalidArgsException('Flag length should equal 1.')
         pass
