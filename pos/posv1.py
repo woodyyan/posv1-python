@@ -105,13 +105,10 @@ def calculate_receipt_saving(receipt_items):
 
 
 def calculate_receipt(items):
-    receipt = {}
     receipt_items = calculate_receipt_items(items)
     total = calculate_receipt_total(receipt_items)
     saving = calculate_receipt_saving(receipt_items)
-    receipt['items'] = receipt_items
-    receipt['total'] = total
-    receipt['saving'] = saving
+    receipt = {'items': receipt_items, 'total': total, 'saving': saving}
     return receipt
 
 
@@ -159,13 +156,6 @@ class Receipt:
     items = []
     total = 0
     saving = 0
-
-
-class Employee:
-    def __init__(self, name, age, id):
-        self.name = name
-        self.age = age
-        self.id = id
 
 
 if __name__ == '__main__':
