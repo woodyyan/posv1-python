@@ -3,6 +3,7 @@ from pos.ReceiptItem import ReceiptItem
 
 
 def decode_barcodes(tags):
+    print(tags)
     barcodes = []
     for tag in tags:
         if '-' in tag:
@@ -13,6 +14,7 @@ def decode_barcodes(tags):
         else:
             barcodes.append(tag)
 
+    print(barcodes)
     return barcodes
 
 
@@ -74,8 +76,10 @@ def combine_items(barcodes):
 
 
 def decode_tags(tags):
+    print(tags)
     barcodes = decode_barcodes(tags)
     combined_items = combine_items(barcodes)
+    print(combined_items)
     return combined_items
 
 
@@ -94,36 +98,47 @@ def promote_receipt_items(items, all_promotions):
 
 
 def calculate_receipt_items(items):
+    print(items)
     for item in items:
         count = item.count
         price = item.price
         item.total = price * count
     # return items
     all_promotions = load_all_promotions()
-    return promote_receipt_items(items, all_promotions)
+    promoted_items = promote_receipt_items(items, all_promotions)
+    print(promoted_items)
+    return promoted_items
 
 
 def calculate_receipt_total(items):
+    print(items)
     total = 0
     for item in items:
         total += item.total
+    print(total)
     return total
 
 
 def calculate_receipt_saving(receipt_items):
+    print(receipt_items)
     total = 0
     promoted_total = 0
     for item in receipt_items:
         total += item.count * item.price
         promoted_total += item.total
-    return total - promoted_total
+    saving = total - promoted_total
+    print(saving)
+    return saving
 
 
 def calculate_receipt(items):
+    print(items)
     receipt_items = calculate_receipt_items(items)
     total = calculate_receipt_total(receipt_items)
     saving = calculate_receipt_saving(receipt_items)
-    return Receipt(items, total, saving)
+    receipt = Receipt(items, total, saving)
+    print(receipt)
+    return receipt
 
 
 def render_header():
@@ -152,12 +167,15 @@ def render_footer():
 
 
 def render_receipt(receipt):
+    print(receipt)
     header = render_header()
     item_str = render_items(receipt.items)
     total_str = render_total(receipt.total)
     saving_str = render_saving(receipt.saving)
     footer = render_footer()
-    return '\n'.join([header, item_str, total_str, saving_str, footer])
+    rendered_receipt = '\n'.join([header, item_str, total_str, saving_str, footer])
+    print(rendered_receipt)
+    return rendered_receipt
 
 
 def print_receipt(tags):

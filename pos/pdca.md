@@ -22,7 +22,7 @@
 ## promote_receipt_items
 ### plan
 
-15min
+10min
 
 ### do
 
@@ -30,6 +30,6 @@
 
 ### check
 
-
+- 
 
 ### action
