@@ -13,7 +13,7 @@
 
 ### action
 
-- 练习链接里面的练习https://www.w3schools.com/python/python_dictionaries.asp
+- 下一轮开始前，先练习链接里面的练习https://www.w3schools.com/python/python_dictionaries.asp
 
 
 ## combine_items
