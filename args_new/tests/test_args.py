@@ -34,6 +34,13 @@ class TestArgs(unittest.TestCase):
         except InvalidArgsException as ex:
             self.assertEqual(ex.message, 'Flag length should equal 1.')
 
+    def test_should_raise_invalid_args_exception_given_space_in_value(self):
+        try:
+            Arg('l', 'val ue')
+            self.fail()
+        except InvalidArgsException as ex:
+            self.assertEqual(ex.message, 'Value cannot contains space.')
+
 
 if __name__ == '__main__':
     unittest.main()

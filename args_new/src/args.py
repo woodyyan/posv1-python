@@ -6,17 +6,18 @@ ARG_DELIMITER = '-'
 
 class Arg:
     def __init__(self, flag=None, value=None):
-        self.__validate(flag)
+        self.__validate(flag, value)
         self.flag = flag.strip('-')
         self.value = value
 
     def with_flag(self, flag) -> bool:
         return self.flag == flag
 
-    def __validate(self, flag):
+    def __validate(self, flag, value):
         if len(flag) > 1:
             raise InvalidArgsException('Flag length should equal 1.')
-        pass
+        if value and ' ' in value:
+            raise InvalidArgsException('Value cannot contains space.')
 
 
 class Args:
