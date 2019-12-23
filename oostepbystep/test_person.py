@@ -1,6 +1,8 @@
 import unittest
 
-from oostepbystep.person import Person, Student, Teacher
+from oostepbystep.person import Person
+from oostepbystep.student import Student
+from oostepbystep.teacher import Teacher
 
 
 class TestPerson(unittest.TestCase):
