@@ -1,6 +1,6 @@
 import unittest
 
-from parking_lot.src.ParkingManager import ParkingManager
+from parking_lot.src.parking_manager import ParkingManager
 from parking_lot.src.car_ticket import Car, Ticket
 from parking_lot.src.exception import NoEnoughSpaceException
 from parking_lot.src.parkingboy import ParkingBoy
